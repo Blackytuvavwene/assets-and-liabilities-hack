@@ -61,7 +61,7 @@ class EmploymentDetails {
   final String? lastEmploymentRank;
   final String? employerSalary;
   final String? employerStartDate;
-  final String? employerEndDate;
+  final List<ImmediateLastEmployer>? employerEndDate;
   final EmploymentStatus? employmentStatus;
   final DateOfLastAppointment? dateOfLastAppointment;
 
@@ -77,6 +77,15 @@ class EmploymentDetails {
     this.employerEndDate,
     this.employmentStatus,
     this.dateOfLastAppointment,
+  });
+}
+
+// personal user last immediate employer class
+class ImmediateLastEmployer {
+  final String? employerName;
+
+  ImmediateLastEmployer({
+    this.employerName,
   });
 }
 
