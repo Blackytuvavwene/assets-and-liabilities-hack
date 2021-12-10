@@ -1,28 +1,6 @@
-// type of national identity enum
-enum NationalIdentity {
-  idCard,
-  passport,
-}
-
-/// marital status enum
-enum MaritalStatus {
-  single,
-  married,
-  divorced,
-  widowed,
-}
-
-// type of employment status enum
-enum EmploymentStatus {
-  contract,
-  selfEmployed,
-  unemployed,
-  student,
-  permanent,
-  temporary,
-}
-
 // personal user information class
+import 'package:di_assets/src/app/global/globals.dart';
+
 class UserDetails {
   final String? firstName;
   final String? lastName;
