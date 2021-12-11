@@ -1,4 +1,5 @@
 // cash assests class
+
 import 'package:di_assets/src/app/global/globals.dart';
 
 class Cash {
