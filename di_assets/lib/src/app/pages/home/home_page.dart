@@ -1,4 +1,5 @@
 import 'package:di_assets/src/app/global/globals.dart';
+import 'package:di_assets/src/app/pages/home/widgets/assets_info_card_web.dart';
 import 'package:flutter/material.dart';
 
 import 'package:di_assets/src/app/pages/widgets/poppins_text.dart';
@@ -62,11 +63,30 @@ class HomePageWeb extends HookConsumerWidget {
                   horizontal: 10.w,
                   vertical: 10.h,
                 ),
+                child: Column(
+                  children: const [AssetsCardInfoWeb()],
+                ),
               )
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class HomePageTab extends HookConsumerWidget {
+  const HomePageTab({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container();
+  }
+}
+
+class HomePageMobile extends HookConsumerWidget {
+  const HomePageMobile({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Container();
   }
 }

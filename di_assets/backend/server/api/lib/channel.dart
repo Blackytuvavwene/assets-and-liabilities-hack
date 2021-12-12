@@ -30,7 +30,7 @@ class ApiChannel extends ApplicationChannel {
     // Prefer to use `link` instead of `linkFunction`.
     // See: https://conduit.io/docs/http/request_controller/
     router.route("/example").linkFunction((request) async {
-      return Response.ok({"key": "value"});
+      return Response.ok({"key": "ba3o"});
     });
 
     return router;

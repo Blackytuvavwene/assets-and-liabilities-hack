@@ -24,10 +24,10 @@ class AssetsCardInfoWeb extends HookConsumerWidget {
     return Card(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children:  [
-          Row(children: [
-            
-          ],)
+        children: [
+          Row(
+            children: const [],
+          )
         ],
       ),
     );

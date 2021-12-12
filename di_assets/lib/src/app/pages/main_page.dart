@@ -1,3 +1,4 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:di_assets/src/app/pages/dashboard/dashboard_page.dart';
 import 'package:di_assets/src/app/pages/home/home_page.dart';
 import 'package:di_assets/src/app/pages/profile/profile_page.dart';
@@ -7,6 +8,7 @@ import 'package:di_assets/src/app/pages/widgets/web_nav_items.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:line_icons/line_icon.dart';
 import 'package:sizer/sizer.dart';
 
 class MainPage extends StatelessWidget {
@@ -14,24 +16,10 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ResLayout(
-      web: const MainPageWeb(),
-      tablet: Container(
-        color: Colors.red,
-        child: const Center(
-          child: Potxt(
-            text: 'TabMain',
-          ),
-        ),
-      ),
-      phone: Container(
-        color: Colors.blue,
-        child: const Center(
-          child: Potxt(
-            text: 'MobileMain',
-          ),
-        ),
-      ),
+    return const ResLayout(
+      web: MainPageWeb(),
+      tablet: MainPageTab(),
+      phone: MainPageTab(),
     );
   }
 }
@@ -102,20 +90,80 @@ class MainPageWeb extends HookConsumerWidget {
   }
 }
 
-class MainPageTab extends HookConsumerWidget {
+class MainPageTab extends StatefulWidget {
   const MainPageTab({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var _pages = [
-      const HomePage(),
-      const DashBoardPage(),
-      const ProfilePage(),
-    ];
+  _MainPageTabState createState() => _MainPageTabState();
+}
+
+class _MainPageTabState extends State<MainPageTab> {
+  int _selectedIndex = 0;
+  PageController? _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController?.dispose();
+    super.dispose();
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      _pageController?.animateToPage(
+        index,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.ease,
+      );
+      _pageController?.jumpToPage(index);
+    });
+  }
+
+  List<Widget> _pages() => [
+        const HomePage(),
+        const DashBoardPage(),
+        const ProfilePage(),
+      ];
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: _pages,
-        ),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() => _selectedIndex = index);
+        },
+        children: _pages(),
+      ),
+      bottomNavigationBar: BottomNavyBar(
+        selectedIndex: _selectedIndex,
+        showElevation: false,
+        items: [
+          BottomNavyBarItem(
+            icon: LineIcon.home(),
+            title: const Potxt(
+              text: 'Home',
+            ),
+          ),
+          BottomNavyBarItem(
+            icon: LineIcon.city(),
+            title: const Potxt(
+              text: 'Dashboard',
+            ),
+          ),
+          BottomNavyBarItem(
+            icon: LineIcon.user(),
+            title: const Potxt(
+              text: 'Profile',
+            ),
+          ),
+        ],
+        onItemSelected: _onItemTapped,
       ),
     );
   }
